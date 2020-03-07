@@ -1,0 +1,6 @@
+
+Rsquid:S1068
+"/Remove this unused "isFavourite" private field.(³²Ñ“úÿÿÿÿ8ˆ´Ðè‰.
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ùæñÃûÿÿÿÿ
+Fsquid:S11482"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8ˆ´Ðè‰.
+osquid:S2095G"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(µÎ Àúÿÿÿÿ8ˆ´Ðè‰.
