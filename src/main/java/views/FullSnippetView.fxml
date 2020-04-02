@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
@@ -8,11 +9,12 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FullSnippetController">
+<DialogPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FullSnippetController">
    <content>
       <GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="530.0" vgap="10.0">
          <columnConstraints>
@@ -22,11 +24,12 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="42.0" minHeight="3.0" prefHeight="7.0" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="42.0" minHeight="9.0" prefHeight="24.0" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="73.0" minHeight="6.0" prefHeight="26.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="308.0" minHeight="10.0" prefHeight="308.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="113.0" minHeight="9.0" prefHeight="36.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="128.0" minHeight="6.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="159.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="236.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="308.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" text="name" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
@@ -68,6 +71,12 @@
                   </Label>
                </children>
             </HBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <children>
+                  <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleCopySnippetCode" text="Copy" />
+                  <Button layoutX="59.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleEditSnippet" text="Edit" />
+               </children>
+            </Pane>
          </children>
          <opaqueInsets>
             <Insets />

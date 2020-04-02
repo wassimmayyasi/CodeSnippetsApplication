@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,12 +18,19 @@
                </font>
             </Label>
             <Region prefHeight="27.0" prefWidth="148.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#handleViewSnippet" text="View" />
+            <Button mnemonicParsing="false" onAction="#handleFavouritingSnippet" prefHeight="25.0" prefWidth="91.0" text="Favourite" />
+            <Button mnemonicParsing="false" onAction="#handleViewSnippet" prefHeight="25.0" prefWidth="70.0" text="View" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteSnippet" prefHeight="25.0" prefWidth="78.0" text="Delete" textFill="RED" />
          </children>
       </HBox>
       <HBox VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="descriptionLbl" prefHeight="52.0" prefWidth="303.0" wrapText="true" HBox.hgrow="ALWAYS" />
+            <Pane prefHeight="48.0" prefWidth="313.0">
+               <children>
+                  <Label fx:id="descriptionLbl" layoutY="19.0" prefHeight="31.0" prefWidth="303.0" wrapText="true" />
+                  <Label fx:id="languageLbl" prefHeight="17.0" prefWidth="303.0" />
+               </children>
+            </Pane>
          </children>
       </HBox>
    </children>
