@@ -30,3 +30,13 @@ dependencies {
     implementation group: 'org.apache.httpcomponents',  name: 'httpclient', version: '4.3.6'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'controllers.Main'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
