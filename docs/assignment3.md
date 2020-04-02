@@ -49,6 +49,8 @@ Feedback for Implementation:
 
 ## [Application design patterns](https://drive.google.com/file/d/11ZYfYYXKNdSaMGojpPGUXDGSk6vL9nA5/view?usp=sharing)
 
+Authors: wassim Mayyassi, Nour Oujjit
+
 ![img](https://lh4.googleusercontent.com/x_TdF1eXjNvj03JtyqEysFEjDb73cTSQxRRpbKS5hKJ04Ue_dbZtvJXAukQjZ-oihZQlh8-dN4U1-zHEH0iQuIq2VMX1JxwV3ItOFPN54OspyNCJiZM4EM4aRoQxSNsaz-62W3JG)
 
 
@@ -188,7 +190,7 @@ Relationships
 
 Aggregates three classes: **SnippetManager**, **SnippetSearcher** and **SnippetConverter**. These aggregated elements are all delegated functionality. **SnippetSearcher** and **SnippetConverter** used to be one class, however since the **SnippetSearcher** class contained a lot of code the two where split up and an aggregation association was needed with **SnippetSupplier** being the aggregating end. **SnippetManager** was aggregated inorder to call the *getJsonObj()* function throughout the functions of **SnippetSupplier**. Finally SnippetConverter was aggregated to translate lists of **JSONObjects** into lists of **Snippet** objects.
 
-### SnippetSearcher
+### models.SnippetSearcher
 
 Description
 
@@ -276,9 +278,7 @@ The relationships connected to the interface will be dealt with when covering th
 
  
 
- 
-
-models.display_states: DisplayAllState & DisplayFavouritesState
+### models.display_states: DisplayAllState & DisplayFavouritesState
 
 Description
 
@@ -402,7 +402,7 @@ This class aggregates two types: **addAndEditController** and **TextInputValidat
 
  
 
-SnippetDataObserver
+### SnippetDataObserver
 
 Description
 
@@ -410,7 +410,7 @@ Interface containing the declaration of a single function, namely, *contentsChan
 
  
 
-BaseController
+### BaseController
 
 Description
 
@@ -448,7 +448,7 @@ relationships
 
 Aggregates the SnippetManager because the snippet manager handles the favouriting and the deleting of snippets for this class. The class is composed of the GUI elements it uses because These cannot fully exist without a view to be displayed on. The class extends javafx.scene.control.ListCell<Snippet>.
 
-FullSnippetController
+### FullSnippetController
 
 Description
 
