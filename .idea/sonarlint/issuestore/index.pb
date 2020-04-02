@@ -3,8 +3,6 @@
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 Q
 !src/main/java/Models/Snippet.java,0\e\0ef0aff41f1d9a97744a013dd2a17008227a1b99
-S
-#src/main/java/Models/JsonTests.java,a\e\ae0e0761915b93c32b09cc984559bd2a466ad2c7
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
 ;
@@ -31,7 +29,9 @@ X
 (src/main/java/Views/FullSnippetView.fxml,3\0\305869a7ea97aa0c98721aa7afa040f3e6d9d85e
 X
 (src/main/java/Views/snippetCellView.fxml,a\5\a5112a818db554fbdb2d331a7334e934220b70c8
-]
--src/main/java/Views/AddAndEditController.fxml,f\d\fdd78289e233bd550176bde44e3febef6582a2e0
 c
 3src/main/java/Controllers/AddAndEditController.java,3\0\30a4d2d43a6bf59e31f273e5a4e1cd9195f6956c
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+c
+3src/main/java/controllers/AddAndEditController.java,7\6\761a47d95b8d674326a0efacd2365677fe51df93

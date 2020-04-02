@@ -1,27 +1,30 @@
 package models;
 
-import java.io.*;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Snippet {
-    private static final String CONTENT_FOLDER = "snippet_content_files";
-
-    private String name, description, contentFilePath, programmingLanguage;
+    private String name;
+    private String description;
+    private String programmingLanguage;
+    private String path;
+    private String date;
     private List<String> tags;
     private Boolean isFavourite;
-    private LocalDateTime date;
 
-    public Snippet(String name, String description, String programmingLanguage, List<String> tags) {
+    public Snippet(String name, String description,
+                   String programmingLanguage, List<String> tags) {
         this.name = name;
         this.description = description;
         this.programmingLanguage = programmingLanguage;
         this.tags = tags;
-
+        path = SnippetIO.generateValidPath();
         isFavourite = false;
-        date = LocalDateTime.now();
-        contentFilePath = generateContentFileName();
+        date = LocalDateTime.now().
+                format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
 
@@ -37,7 +40,7 @@ public class Snippet {
         return programmingLanguage;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -45,46 +48,38 @@ public class Snippet {
         return new ArrayList<>(tags);
     }
 
-    public String getContent() throws IOException {
-        StringBuilder codeStr = new StringBuilder();
-        FileReader fileReader = new FileReader(new File(contentFilePath));
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-        int readChar = 0;
-        while((readChar = bufferedReader.read()) != -1){
-            codeStr.append((char) readChar);
-        }
-
-        return codeStr.toString();
+    String getPath() {
+        return path;
     }
 
-
-    public void writeContentFile(String codeString){
-        File folder = new File(CONTENT_FOLDER);
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
-        try (FileWriter file = new FileWriter(contentFilePath)) {
-            file.write(codeString);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    Boolean getFavourite() {
+        return isFavourite;
     }
 
-
-    private String generateContentFileName() {
-        String filePath = CONTENT_FOLDER+ "/" + name + ".txt";
-
-        int count = 1;
-        while(new File(filePath).exists()){
-            filePath = CONTENT_FOLDER + "/" + name +"(" + count + ")" + ".txt";
-            count++;
-        }
-
-        return filePath;
+    public String getCode() throws IOException {
+        return new SnippetIO().read(this.getPath());
     }
+
+    void seIsFavourite(Boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProgrammingLanguage(String programmingLanguage){
+            this.programmingLanguage = programmingLanguage;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
 
 
 }

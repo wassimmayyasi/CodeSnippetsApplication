@@ -1,28 +1,65 @@
 package controllers;
 
+import controllers.utils.DialogOpener;
+import javafx.scene.control.Label;
+import models.SnippetDataObserver;
 import models.Snippet;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import models.SnippetManager;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.util.List;
 
-public class FullSnippetController {
-    @FXML Label nameLbl, languageLbl, tagsLbl, descriptionLbl, codeLbl, dateLbl;
 
-    void loadSnippetOntoView(Snippet snippet) throws IOException {
-        nameLbl.setText(snippet.getName());
-        languageLbl.setText(snippet.getProgrammingLanguage());
-        tagsLbl.setText(tagsToString(snippet.getTags()));
-        descriptionLbl.setText(snippet.getDescription());
-        codeLbl.setText(snippet.getContent());
-        dateLbl.setText(snippet.getDate().toString());
+public class FullSnippetController implements SnippetDataObserver {
+    @FXML private Label nameLbl;
+    @FXML private Label languageLbl;
+    @FXML private Label tagsLbl;
+    @FXML private Label descriptionLbl;
+    @FXML private Label codeLbl;
+    @FXML private Label dateLbl;
+
+    private Snippet shownSnippet;
+
+
+    public void initialize() {
+        SnippetManager snippetManager = SnippetManager.instance();
+        snippetManager.addObserver(this);
     }
 
-    private String tagsToString(List<String> tags) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(String tag : tags) {
-            stringBuilder.append(tag).append(" ");
-        }
-        return stringBuilder.toString();
+    // Fills all Labels with information from given Snippet instance
+    public void loadSnippetOntoView(Snippet shownSnippet) throws IOException {
+        this.shownSnippet = shownSnippet;
+
+        nameLbl.setText(shownSnippet.getName());
+        dateLbl.setText(shownSnippet.getDate());
+        languageLbl.setText(shownSnippet.getProgrammingLanguage());
+        descriptionLbl.setText(shownSnippet.getDescription());
+        codeLbl.setText(shownSnippet.getCode());
+        tagsLbl.setText(String.join(" ", shownSnippet.getTags()));
+    }
+
+
+    @FXML
+    // Copies the code of a snippet onto clipboard
+    private void handleCopySnippetCode() throws IOException {
+        StringSelection stringSelection = new StringSelection(shownSnippet.getCode());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+    }
+
+
+    @FXML
+    private void handleEditSnippet() throws IOException {
+        new DialogOpener().openEditDialog(shownSnippet);
+    }
+
+
+    @Override
+    // Called by SnippetManager when contents of data change
+    public void contentsChanged() throws IOException {
+        loadSnippetOntoView(shownSnippet);
     }
 }

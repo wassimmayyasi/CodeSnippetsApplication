@@ -1,9 +1,0 @@
-
-]squid:S1118":Add a private constructor to hide the implicit public one.(¾ÁûÃüÿÿÿÿ8 Éş†.
-[
-squid:S106"9Replace this use of System.out or System.err by a logger.(÷â şÿÿÿÿ8éÔÈş†.
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ùæñÃûÿÿÿÿ8öÎ§’‡.
-U
-squid:S106"9Replace this use of System.out or System.err by a logger.(¬ Š>8éÔÈş†.
-Fsquid:S11484"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8éÔÈş†.
-Rsquid:S1481&"/Remove this unused "newSnippet" local variable.(ƒ”ŞÆùÿÿÿÿ8ëÜ²Š.

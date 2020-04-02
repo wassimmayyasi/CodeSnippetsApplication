@@ -1,63 +1,123 @@
 package controllers;
 
-import javafx.beans.InvalidationListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import models.Snippet;
-import models.SnippetDataManager;
+import com.jfoenix.controls.JFXComboBox;
+import controllers.utils.DialogOpener;
+import javafx.scene.control.*;
+
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import org.json.simple.parser.ParseException;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import models.*;
+import models.SnippetDataObserver;
+import models.display_states.DisplayAllState;
+import models.display_states.DisplayFavouritesState;
+import models.display_states.DisplayState;
+import models.snippet_comparators.*;
 
-public class BaseController {
-    @FXML private JFXListView snippetsLV;
-    private ObservableList<Snippet> displaySnippets;
+import java.io.IOException;
+import java.util.*;
+
+
+public class BaseController implements SnippetDataObserver {
+    @FXML private JFXListView snippetsLV; // Displays snippets according to current state
+    @FXML private TextField searchBarTF;
+    @FXML private JFXComboBox<String> sortingCbx;
+
+    private DisplayState currentState;
+    private DisplayState displayAllState;
+    private DisplayState displayFavouritesState;
+
 
     public void initialize() {
-        displaySnippets = FXCollections.observableList(SnippetDataManager.getAllSnippets());
-        displaySnippets.addListener((InvalidationListener)
-                o -> snippetsLV.getItems().setAll(displaySnippets));
+        SnippetManager.instance().addObserver(this);
+        snippetsLV.setCellFactory(s -> new DisplayEntryController());
 
-        snippetsLV.setCellFactory(s -> new SnippetCellController());
-        snippetsLV.getItems().setAll(SnippetDataManager.getAllSnippets());
+        // Initializes sorting box with choices and sets the default
+        sortingCbx.getItems().addAll(Arrays.asList("Date Added", "Name", "Language"));
+        sortingCbx.setValue(sortingCbx.getItems().get(0));
+
+        displayAllState = new DisplayAllState();
+        displayFavouritesState = new DisplayFavouritesState();
+        currentState = displayAllState;
+
+        loadDisplayData();
     }
 
+
     @FXML
-    private void handleDisplay() {
-        List<Snippet> updatedList = SnippetDataManager.getAllSnippets();
-        displaySnippets.setAll(FXCollections.observableList(updatedList));
+    // onAction function of "Add" button
+    private void handleAddSnippet() throws IOException {
+        new DialogOpener().openAddDialog();
     }
 
+
     @FXML
-    private void openAddDialog() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/views/AddAndEditView.fxml"));
-            DialogPane dialogPane = fxmlLoader.load();
+    // onAction function of "Favourites" button
+    private void handleDisplayFavourites() {
+        currentState = displayFavouritesState;
+        searchBarTF.clear();
+        loadDisplayData();
+    }
 
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane(dialogPane);
-            dialog.setTitle("Add new snippet");
 
-            Optional<ButtonType> result = dialog.showAndWait();
-            if(result.isPresent() && result.get() == ButtonType.APPLY){
-                AddAndEditController controller = fxmlLoader.getController();
-                controller.handleSaveNewSnippet();
-                handleDisplay();
-            }
+    @FXML
+    // onAction function of "All" button
+    private void handleDisplayAll() {
+        currentState = displayAllState;
+        searchBarTF.clear();
+        loadDisplayData();
+    }
+    
 
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+    @Override
+    // this function is called after add, edit and delete to refresh the display
+    public void contentsChanged() {
+        loadDisplayData();
+    }
+
+
+    @FXML
+    // loads snippets onto the list view
+    // Also onAction function for the sortingCbx
+    private void loadDisplayData() {
+        List<Snippet> displaySnippets;
+
+        // if user didn't type search query, load full collection
+        if(searchBarTF.getText().isEmpty()) {
+            displaySnippets = currentState.getDisplayData();
         }
+
+        else { // If user typed search query, load search results
+            displaySnippets = currentState.
+                    getSearchDisplayData(searchBarTF.getText());
+        }
+
+
+        // Sort display snippets on chosen setting user and display them
+        sortDisplaySnippets(displaySnippets);
+        snippetsLV.getItems().setAll(displaySnippets);
     }
 
+
+    private void sortDisplaySnippets(List<Snippet> displaySnippets) {
+        String choice = sortingCbx.getValue();
+
+        switch(choice) {
+            case "Date Added":
+                displaySnippets.
+                        sort(new SnippetsSortByDate());
+                break;
+            case "Name":
+                displaySnippets.
+                        sort(new SnippetsSortByName());
+                break;
+            case "Language":
+                displaySnippets.
+                        sort(new SnippetsSortByLanguage());
+                break;
+
+        }
+
+    }
 
 
 }
