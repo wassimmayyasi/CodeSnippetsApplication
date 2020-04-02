@@ -31,3 +31,7 @@ d
 4src/main/java/controllers/FullSnippetController.java,b\3\b3d45a1b9698d8de4158fb5e3d0309f138960f08
 S
 #src/main/java/controllers/Main.java,f\b\fb946a3fe8a2e67ff43f8bf0e3554e4e14e5b60a
+Q
+!src/main/java/models/Snippet.java,e\d\edd00897e417c7bc23bfbea78d7b9b5f3787fbe5
+Z
+*src/main/java/models/SnippetConverter.java,c\c\cc94036829421a41d696dfe7ca082b0ddfb619ac
