@@ -1,0 +1,14 @@
+
+>
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+>
+java:S1148?"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+M
+java:S1135"2Complete the task associated to this TODO comment.(îÁé™úÿÿÿÿ
+3
+java:S2119."Save and re-use this "Random".(¼İÅf
+A
+java:S1075/"&Remove this hard-coded path-delimiter.(øÇĞëüÿÿÿÿ
+_
+java:S4042Y"IUse "java.nio.Files#delete" here for better messages on error conditions.(§·ˆ•
+P	java:S899Y";Do something with the "boolean" value returned by "delete".(§·ˆ•

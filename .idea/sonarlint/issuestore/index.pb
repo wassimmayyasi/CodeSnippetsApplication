@@ -35,3 +35,11 @@ Q
 !src/main/java/models/Snippet.java,e\d\edd00897e417c7bc23bfbea78d7b9b5f3787fbe5
 Z
 *src/main/java/models/SnippetConverter.java,c\c\cc94036829421a41d696dfe7ca082b0ddfb619ac
+S
+#src/main/java/models/SnippetIO.java,9\b\9b02c9c5737dcc1e7dab5e2108f01d47e4a48ede
+]
+-src/main/java/controllers/BaseController.java,0\3\03a107d01e18591c01ed70d466054febfaaf12ca
+e
+5src/main/java/controllers/DisplayEntryController.java,f\b\fbca59e28b05e860b5e25103e9a0e9a2f296a3e0
+a
+1src/main/java/controllers/utils/DialogOpener.java,a\2\a2f98ea5b01e1ae5fc6c83cac84226d229552a6a
